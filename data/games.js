@@ -1,0 +1,85 @@
+export const GAMES_DATA = [
+  {
+    id: 'football-bros',
+    title: 'Football Bros',
+    description: 'The ultimate unblocked football experience! Choose your team and dominate the field with incredible plays.',
+    category: 'Sports',
+    thumbnail: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=800&auto=format&fit=crop',
+    iframeUrl: 'https://footballbros.io/',
+    isClean: false
+  },
+  {
+    id: 'basket-random',
+    title: 'Basket Random',
+    description: 'Quirky and unpredictable 2-player basketball action! Every round features different physics, players, and hoops for maximum randomness.',
+    category: 'Sports',
+    thumbnail: 'https://images.unsplash.com/photo-1519861531473-9200362f48b3?q=80&w=800&auto=format&fit=crop',
+    iframeUrl: 'https://64345986-62434566.preview.editmysite.com/uploads/9/9/0/8/139890129/custom_themes/104868751615748392/files/br.xml',
+    isClean: true
+  },
+  {
+    id: 'gvibes',
+    title: 'GVibes',
+    description: 'A fast-paced rhythmic arcade game where you must navigate through obstacles with perfect timing. Experience the chill vibes and challenging gameplay.',
+    category: 'Arcade',
+    thumbnail: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800&auto=format&fit=crop',
+    iframeUrl: 'https://cdn.jsdelivr.net/gh/bodrumkat/tamam@main/12.xml',
+    isClean: true
+  },
+  {
+    id: 'snow-rider-3d',
+    title: 'Snow Rider 3D',
+    description: 'Experience the pure thrill of a high-speed sled ride down a treacherous mountain! Dodge obstacles and collect gifts in this exhilarating 3D winter world.',
+    category: 'Arcade',
+    thumbnail: 'https://images.unsplash.com/photo-1517176642928-5807dc58893c?q=80&w=800&auto=format&fit=crop',
+    iframeUrl: 'https://cdn.jsdelivr.net/gh/hyperwood/turn@004d852c621ecc4fbd99a0bcbe6d10377e34cdd0/lib/sr.xml',
+    isClean: true
+  },
+  {
+    id: 'slither-io-2',
+    title: 'Slither.io 2',
+    description: 'The evolution of the classic snake game. Eat orbs, grow massive, and trap your rivals to dominate the leaderboard.',
+    category: 'Arcade',
+    thumbnail: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop',
+    iframeUrl: 'https://cdn.jsdelivr.net/gh/kelsimsk/wahx@main/2.xml',
+    isClean: true
+  },
+  {
+    id: 'gunspin',
+    title: 'Gunspin',
+    description: 'Master the art of the recoil! Spin your gun through the air and shoot at the perfect moment to travel as far as possible.',
+    category: 'Arcade',
+    thumbnail: 'https://images.unsplash.com/photo-1595113316349-9fa4eb24f884?q=80&w=800&auto=format&fit=crop',
+    iframeUrl: 'https://cdn.jsdelivr.net/gh/gru6nny/ohd@main/qad.xml',
+    isClean: true
+  },
+  {
+    id: 'paper-io-2',
+    title: 'Paper.io 2',
+    description: 'Expand your territory and conquer the arena in this addictive multiplayer strategy game.',
+    category: 'Arcade',
+    thumbnail: 'https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=800&auto=format&fit=crop',
+    iframeUrl: 'https://cdn.jsdelivr.net/gh/centerclassroom/mc55@main/paper-io-2.xml',
+    isClean: true
+  },
+  {
+    id: 'archers',
+    title: 'Archers',
+    description: 'A classic test of aim and precision. Launch your arrows with perfect power and angle to defeat enemies in this addictive arcade challenge.',
+    category: 'Action',
+    thumbnail: 'https://images.unsplash.com/photo-1511078573424-60e53a30283c?q=80&w=800&auto=format&fit=crop',
+    iframeUrl: 'https://cdn.jsdelivr.net/gh/ertemr33/qaza@main/1.xml',
+    isClean: true
+  },
+  {
+    id: 'basket-bros',
+    title: 'Basket Bros',
+    description: 'Fast-paced 1-on-1 basketball action. Slam dunk, block shots, and outplay your opponent.',
+    category: 'Sports',
+    thumbnail: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=800&auto=format&fit=crop',
+    iframeUrl: 'https://cdn.jsdelivr.net/gh/testamalame/100vs@main/saf.xml',
+    isClean: true
+  }
+];
+
+export const CATEGORIES = ['All', 'Action', 'Puzzle', 'Sports', 'Arcade', 'Strategy', 'Retro'];
