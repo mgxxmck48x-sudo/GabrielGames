@@ -2,21 +2,21 @@
 // --- Game Data ---
 const GAMES_DATA = [
   {
-    id: 'basket-random',
-    title: 'Basket Random',
-    description: 'Quirky 2-player basketball action! Every round features different physics, players, and hoops for maximum randomness.',
-    category: 'Sports',
-    thumbnail: 'https://images.unsplash.com/photo-1519861531473-9200362f48b3?q=80&w=800&auto=format&fit=crop',
-    iframeUrl: 'https://64345986-62434566.preview.editmysite.com/uploads/9/9/0/8/139890129/custom_themes/104868751615748392/files/br.xml',
-    isClean: true
-  },
-  {
     id: 'gvibes',
     title: 'GVibes',
     description: 'A fast-paced rhythmic arcade game. Navigate through obstacles with perfect timing and chill vibes.',
     category: 'Arcade',
     thumbnail: 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800&auto=format&fit=crop',
     iframeUrl: 'https://cdn.jsdelivr.net/gh/bodrumkat/tamam@main/12.xml',
+    isClean: true
+  },
+  {
+    id: 'basket-random',
+    title: 'Basket Random',
+    description: 'Quirky 2-player basketball action! Every round features different physics, players, and hoops for maximum randomness.',
+    category: 'Sports',
+    thumbnail: 'https://images.unsplash.com/photo-1519861531473-9200362f48b3?q=80&w=800&auto=format&fit=crop',
+    iframeUrl: 'https://64345986-62434566.preview.editmysite.com/uploads/9/9/0/8/139890129/custom_themes/104868751615748392/files/br.xml',
     isClean: true
   },
   {
@@ -159,7 +159,7 @@ const GameView = (game) => `
         <span>Back to Lobby</span>
       </button>
       <div class="flex gap-2">
-        <button id="toggle-fullscreen" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg border border-slate-700 transition-all">
+        <button id="toggle-fullscreen" class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg shadow-lg transition-all">
           <i class="fas fa-expand"></i>
           <span class="hidden sm:inline">Fullscreen</span>
         </button>
@@ -168,8 +168,8 @@ const GameView = (game) => `
     <div class="relative flex-1 bg-slate-950 rounded-2xl overflow-hidden shadow-2xl border border-slate-800">
       <div id="game-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-900 text-white z-10 hidden">
         <div class="w-12 h-12 border-4 border-indigo-500/20 border-t-indigo-500 rounded-full animate-spin mb-4"></div>
-        <p class="font-bold text-lg">Initializing...</p>
-        <p class="text-xs text-slate-400 mt-2">Connecting to secure game server</p>
+        <p class="font-bold text-lg text-indigo-400">Purifying Game Content...</p>
+        <p class="text-xs text-slate-400 mt-2">Bypassing ads for educational focus</p>
       </div>
       <iframe 
         id="game-iframe" 
@@ -179,7 +179,10 @@ const GameView = (game) => `
       ></iframe>
     </div>
     <div class="bg-slate-900/50 rounded-xl p-4 border border-slate-800">
-       <h2 class="text-xl font-bold text-white mb-1">${game.title}</h2>
+       <div class="flex items-center gap-3 mb-1">
+         <h2 class="text-xl font-bold text-white">${game.title}</h2>
+         <span class="text-[10px] bg-green-500/10 text-green-400 px-2 py-0.5 rounded border border-green-500/20 uppercase font-bold">Unblocked</span>
+       </div>
        <p class="text-slate-400 text-sm">${game.description}</p>
     </div>
   </div>
@@ -197,8 +200,8 @@ async function injectGame(game) {
       const res = await fetch(game.iframeUrl);
       const xmlText = await res.text();
       
-      // Parse XML to extract content if it's wrapped in <Content> (common for unblocked sources)
       let finalHtml = xmlText;
+      // Handle the XML-wrapped games common in unblocked repositories
       if (xmlText.includes('<Content>')) {
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, "text/xml");
@@ -206,9 +209,20 @@ async function injectGame(game) {
         if (contentNode) finalHtml = contentNode.textContent;
       }
       
-      iframe.srcdoc = finalHtml;
-      setTimeout(() => loader?.classList.add('hidden'), 800);
+      iframe.srcdoc = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>body,html{margin:0;padding:0;overflow:hidden;background:#000;width:100%;height:100%}</style>
+        </head>
+        <body>
+          ${finalHtml}
+        </body>
+        </html>
+      `;
+      setTimeout(() => loader?.classList.add('hidden'), 1200);
     } catch (e) {
+      console.warn("Secure fetch failed, direct iframe loading...");
       iframe.src = game.iframeUrl;
       loader?.classList.add('hidden');
     }
@@ -253,7 +267,7 @@ const render = () => {
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pb-20">
             ${filteredGames.length > 0 
               ? filteredGames.map(game => GameCard(game)).join('') 
-              : `<div class="col-span-full py-20 text-center text-slate-500">No games found matches your criteria.</div>`
+              : `<div class="col-span-full py-20 text-center text-slate-500">No games found matches your search.</div>`
             }
           </div>
         </main>
@@ -276,9 +290,8 @@ const attachEventListeners = () => {
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       state.searchQuery = e.target.value;
-      // We don't re-render everything to preserve focus if possible, 
-      // but in this template we do to keep it simple.
       render();
+      // Restore focus
       const input = document.getElementById('search-input');
       if (input) {
         input.focus();
